@@ -200,9 +200,7 @@ function getBooks(page_no=1) {
         $("#fetching").hide();
         //$("#login-button").prop('disabled',false);
         if(!data.status){
-            console.log(data.status);
-            $("#auth_alert").show();
-            $("#auth_alert").text(data.message);
+            window.location.href="login.html";
         }
         if(!data.books) {
             $("#alert").show();
