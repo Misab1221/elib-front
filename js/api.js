@@ -103,7 +103,6 @@ function editBook() {
 
 }
 function getBook() {
-    $("#edit-cont").hide();
     $("#fetching").show();
     var book_id=$.urlParam('id');
     if(!book_id)
