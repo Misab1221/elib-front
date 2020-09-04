@@ -8,10 +8,12 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css" >
     <!-- my css-->
-    <link rel="stylesheet" type="text/css" href="css/mystyle.css">  
+    <link rel="stylesheet" type="text/css" href="css/mystyle.css">
+      <script src="lib/jquery-3.5.1.js"></script>
+      <script src="js/api.js"></script>
     <title>e-Library</title>
   </head>
-  <body>
+  <body onload="getBooks()">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#">
    <img src="images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
@@ -25,11 +27,17 @@
 </ul>
 </nav>
 
-<div class="container">
-  <h2>Books</h2>   
-  <button onclick="myFunction()">Add New Book </button>
-<div class="table-responsive-xl">  
-  <table class="table table-striped">
+    <button class="btn btn-primary" id="fetching" type="button" disabled style="display: none">
+        <span class="spinner-grow spinner-grow-sm "  role="status" aria-hidden="true"></span>
+        Fetching...
+    </button>
+
+    <button onclick="myFunction()">Add New Book </button>
+    <div class="container" id="dash-cont"  style="display: none">
+  <h2>Books</h2>
+
+<div class="table-responsive-xl" >
+  <table class="table table-striped" id="table">
     <thead>
       <tr>
         <th>Book Id</th>
@@ -58,29 +66,22 @@
         <td><a href="#">Delete</a></td>
       </tr>
     </tbody>
+
   </table>
+    <div class="alert alert-dismissible alert-danger fade show" style="display: none;font-size:13px;padding: 5px;margin: 0px; " id="alert"></div>
+
 </div>
- <ul class="pagination justify-content-end">
-    <li class="page-item"><a class="page-link" href="javascript:void(0);">Previous</a></li>
-    <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
-    <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
-    <li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
-  </ul>
   
 </div>
+    <ul class="pagination justify-content-end">
+        <li class="page-item" id="pre" onclick="getBooks(window.page_no-1)"><a class="page-link" href="javascript:void(0);">Previous</a></li>
+        <li class="page-item" id="next" onclick="getBooks(window.page_no+1)"><a class="page-link" href="javascript:void(0);">Next</a></li>
+    </ul>
 <script>
 function myFunction() {
   location.replace("add.html");
 }
-</script>
-<script src="myjs.js"></script>
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="js/bootstrap.min.js" ></script>
-    <script src="server.js"></script>
+</script>  <script src="js/bootstrap.min.js" ></script>
     
   </body>
 </html>

@@ -137,6 +137,48 @@ function getBook() {
     });
 
 }
+window.page_no=1;
+function getBooks(page_no=1) {
+    if(page_no<1) {
+        page_no = 1;
+    }
+    if(page_no===1){
+        $('#pre').addClass('disabled');
+    }
+    else {
+        $('#pre').removeClass('disabled');
+    }
+    window.page_no=page_no;
+    console.log(page_no);
+    $('#table').find('tbody').empty();
+    $("#fetching").show();
+    var token=getCookie("token");
+    $.ajaxSetup({crossDomain:true,xhrFields:{withCredentials:true}});
+    $.post(api_ip+"/admin/get-books",{"page_no":page_no,"token":token},function (data,status) {
+        //alert(document.cookie);
+        $("#fetching").hide();
+        //$("#login-button").prop('disabled',false);
+        if(!data.status) {
+            $("#alert").show();
+            $("#alert").text(data.message);
+            $('#next').addClass('disabled');
+        }
+        else
+        {
+            $('#next').removeClass('disabled');
+            console.log(data.books);
+            $("#dash-cont").show();
+            $('#table').find('tbody').empty();
+            for(i=0;i<data.books.length;i++)
+            {
+                $("#alert").hide();
+                $('#table').append('<tr><td>'+data.books[i].book_id+'</td><td>'+data.books[i].book_title+'</td><td>'+data.books[i].author+'</td><td><a href="view.html?id='+data.books[i].book_id+'">View</a></td><td><a href="edit.html?id='+data.books[i].book_id+'">Edit</a></td><td><a href="#">Delete</a></td></tr>');
+            }
+        }
+    });
+
+}
+
 function test() {
     alert('k');
 
