@@ -1,5 +1,12 @@
 var api_ip="https://m-01.herokuapp.com";
 var api_ip1="http://127.0.0.1:5000";
+$.urlParam = function(name){
+    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    if(results==null)
+        return null;
+    return results[1] || 0;
+}
+
 function login() {
     $("#loading").show();
     $("#login-button").prop('disabled',true);
@@ -56,6 +63,77 @@ function addBook() {
         {
             alert(data.message);
             window.location.href="index.php";
+        }
+    });
+
+}
+function editBook() {
+    $("#loading").show();
+    var book_id=$("#book_id").val();
+    var book_title=$("#book_title").val();
+    var author=$("#author").val();
+    var publications=$("#publications").val();
+    var edition=$("#edition").val();
+    var year=$("#year").val();
+    var price=$("#price").val();
+    var token=getCookie("token");
+    console.log(book_title+"-"+author+"-"+publications+"-"+edition+"-"+year+"-"+price);
+    if(book_title===""||author===""||publications===""||edition===""||year===""||price===""){
+        $("#loading").hide();
+        $("#alert").show();
+        $("#alert").text("All fields are required");
+        return;
+    }
+
+    $.ajaxSetup({crossDomain:true,xhrFields:{withCredentials:true}});
+    $.post(api_ip+"/admin/edit-books",{"book_id":book_id,"book_title":book_title,"author":author,"publications":publications,"edition":edition,"year":year,"price":price,"token":token},function (data,status) {
+        //alert(document.cookie);
+        $("#loading").hide();
+        //$("#login-button").prop('disabled',false);
+        if(!data.status) {
+            $("#alert").show();
+            $("#alert").text(data.message);
+        }
+        else
+        {
+            alert(data.message);
+            window.location.href="index.php";
+        }
+    });
+
+}
+function getBook() {
+    $("#edit-cont").hide();
+    $("#fetching").show();
+    var book_id=$.urlParam('id');
+    if(!book_id)
+    {
+        $("#fetching").hide();
+        $("#alert").show();
+        $("#alert").text("Book id is required");
+        return;
+    }
+    var token=getCookie("token");
+    $.ajaxSetup({crossDomain:true,xhrFields:{withCredentials:true}});
+    $.post(api_ip+"/admin/get-book",{"book_id":book_id,"token":token},function (data,status) {
+        //alert(document.cookie);
+        $("#fetching").hide();
+        //$("#login-button").prop('disabled',false);
+        if(!data.status) {
+            $("#alert").show();
+            $("#alert").text(data.message);
+        }
+        else
+        {
+            console.log(data.book);
+            $("#edit-cont").show();
+            $("#book_id").val(data.book.book_id);
+            $("#book_title").val(data.book.book_title);
+            $("#author").val(data.book.author);
+            $("#publications").val(data.book.publications);
+            $("#edition").val(data.book.edition);
+            $("#year").val(data.book.year);
+            $("#price").val(data.book.price);
         }
     });
 
