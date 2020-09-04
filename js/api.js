@@ -1,5 +1,5 @@
-var api_ip1="https://m-01.herokuapp.com";
-var api_ip="http://127.0.0.1:5000";
+var api_ip="https://m-01.herokuapp.com";
+var api_ip1="http://127.0.0.1:5000";
 function login() {
     $("#loading").show();
     $("#login-button").prop('disabled',true);
