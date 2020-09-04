@@ -1,5 +1,5 @@
-var api_ip="https://m-01.herokuapp.com";
-var api_ip1="http://127.0.0.1:5000";
+var api_ip1="https://m-01.herokuapp.com";
+var api_ip="http://127.0.0.1:5000";
 $.urlParam = function(name){
     var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
     if(results==null)
@@ -62,7 +62,7 @@ function addBook() {
         else
         {
             alert(data.message);
-            window.location.href="index.php";
+            window.location.href="dash.html";
         }
     });
 
@@ -97,7 +97,7 @@ function editBook() {
         else
         {
             alert(data.message);
-            window.location.href="index.php";
+            window.location.href="dash.html";
         }
     });
 
@@ -137,6 +137,47 @@ function getBook() {
     });
 
 }
+function viewBook() {
+    $("#fetching").show();
+    var book_id=$.urlParam('id');
+    if(!book_id)
+    {
+        $("#fetching").hide();
+        $("#alert").show();
+        $("#alert").text("Book id is required");
+        return;
+    }
+    var token=getCookie("token");
+    $.ajaxSetup({crossDomain:true,xhrFields:{withCredentials:true}});
+    $.post(api_ip+"/admin/get-book",{"book_id":book_id,"token":token},function (data,status) {
+        //alert(document.cookie);
+        $("#fetching").hide();
+        //$("#login-button").prop('disabled',false);
+        if(!data.status) {
+            $("#alert").show();
+            $("#alert").text(data.message);
+        }
+        else
+        {
+            console.log(data.book);
+            $("#view-cont").show();
+            $("#book_id").text(data.book.book_id);
+            $("#book_title").text(data.book.book_title);
+            $("#author").text(data.book.author);
+            $("#publications").text(data.book.publications);
+            $("#edition").text(data.book.edition);
+            $("#year").text(data.book.year);
+            $("#price").text(data.book.price);
+        }
+    });
+
+}
+function logout(){
+    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/e-lib;";
+    alert("Logged out successfully");
+    window.location.href="home.html";
+}
 window.page_no=1;
 function getBooks(page_no=1) {
     if(page_no<1) {
@@ -158,7 +199,12 @@ function getBooks(page_no=1) {
         //alert(document.cookie);
         $("#fetching").hide();
         //$("#login-button").prop('disabled',false);
-        if(!data.status) {
+        if(!data.status){
+            console.log(data.status);
+            $("#auth_alert").show();
+            $("#auth_alert").text(data.message);
+        }
+        if(!data.books) {
             $("#alert").show();
             $("#alert").text(data.message);
             $('#next').addClass('disabled');
@@ -172,8 +218,30 @@ function getBooks(page_no=1) {
             for(i=0;i<data.books.length;i++)
             {
                 $("#alert").hide();
-                $('#table').append('<tr><td>'+data.books[i].book_id+'</td><td>'+data.books[i].book_title+'</td><td>'+data.books[i].author+'</td><td><a href="view.html?id='+data.books[i].book_id+'">View</a></td><td><a href="edit.html?id='+data.books[i].book_id+'">Edit</a></td><td><a href="#">Delete</a></td></tr>');
+                $('#table').append('<tr><td>'+data.books[i].book_id+'</td><td>'+data.books[i].book_title+'</td><td>'+data.books[i].author+'</td><td><a href="view.html?id='+data.books[i].book_id+'">View</a></td><td><a href="edit.html?id='+data.books[i].book_id+'">Edit</a></td><td><button onclick="deleteBook('+data.books[i].book_id+')" class="delete">Delete</button></td></tr>');
             }
+        }
+    });
+
+}
+function deleteBook(book_id) {
+    $("#deleting").show();//
+    var token=getCookie("token");
+    var con=confirm("Are you sure to delete book -"+book_id+" ?");
+    if(!con) return;
+    $.ajaxSetup({crossDomain:true,xhrFields:{withCredentials:true}});
+    $.post(api_ip+"/admin/delete-book",{"book_id":book_id,"token":token},function (data,status) {
+        //alert(document.cookie);
+        $("#deleting").hide();
+        //$("#login-button").prop('disabled',false);
+        if(!data.status) {
+            $("#alert").show();
+            $("#alert").text(data.message);
+        }
+        else
+        {
+            alert(data.message);
+            window.location.href="dash.html";
         }
     });
 

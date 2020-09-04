@@ -8,42 +8,50 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css" >
     <!-- my css-->
-    <link rel="stylesheet" type="text/css" href="css/mystyle.css">  
+    <link rel="stylesheet" type="text/css" href="css/mystyle.css">
+    <script src="lib/jquery-3.5.1.js"></script>
+    <script src="js/api.js"></script>
     <title>e-Library</title>
   </head>
-  <body>
+  <body onload="viewBook()">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">
+  <a class="navbar-brand" href="home.html">
    <img src="images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
   
   e-Library</a>
   <ul class="navbar-nav ml-md-auto">
   <li>
-	<a  href="#">Logout</a>
+	<a  onclick="logout()">Logout</a>
 	</div>
 	</li>
 </ul>
 </nav>
 
- 
-  <div class="container">
+    <button class="btn btn-primary" id="fetching" type="button" disabled style="display: none">
+      <span class="spinner-grow spinner-grow-sm "  role="status" aria-hidden="true"></span>
+      Fetching...
+    </button>
+    <div class="alert alert-dismissible alert-danger fade show" style="display: none;font-size:13px;padding: 5px;margin: 0px; " id="alert">error</div>
+
+    <div class="container"  id="view-cont" style="display: none" >
   <h3>Book Details</h3>
-  <hr>
+
+    <hr>
   
     <div class="row">
       <div class="col-25">
         <label >Book Id </label>
       </div>
       <div class="col-75">
-        <label >Book Id</label>
+        <label id="book_id">Book Id</label>
       </div>
     </div>
     <div class="row">
       <div class="col-25">
-        <label >Book Name </label>
+        <label >Book Title </label>
       </div>
       <div class="col-75">
-        <label>Book Name</label>
+        <label id="book_title">Book Name</label>
       </div>
     </div>
 	<div class="row">
@@ -51,7 +59,7 @@
         <label >Author</label>
       </div>
       <div class="col-75">
-       <label >Author</label>
+       <label  id="author">Author</label>
       </div>
     </div>
     <div class="row">
@@ -59,7 +67,7 @@
         <label >Publicatios</label>
       </div>
       <div class="col-75">
-         <label >Publicatios</label>
+         <label  id="publications">Publicatios</label>
       </div>
     </div>
 	<div class="row">
@@ -67,7 +75,7 @@
         <label>Edition</label>
       </div>
       <div class="col-75">
-         <label>Edition</label>
+         <label id="edition">Edition</label>
       </div>
     </div>
     <div class="row">
@@ -75,7 +83,7 @@
         <label >Published Year</label>
       </div>
       <div class="col-75">
-         <label >Published Year</label>
+         <label  id="year">Published Year</label>
       </div>
     </div>
 	<div class="row">
@@ -83,7 +91,7 @@
         <label >Price</label>
       </div>
       <div class="col-75">
-         <label >Price</label>
+         <label  id="price">Price</label>
       </div>
     </div>
     
@@ -98,7 +106,6 @@
 
 
 
-<script src="myjs.js"></script>
 <script>
 function goBack() {
   window.history.back();
@@ -107,10 +114,7 @@ function goBack() {
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="js/bootstrap.min.js" ></script>
-    <script src="server.js"></script>
+     <script src="js/bootstrap.min.js" ></script>
     
   </body>
 </html>
