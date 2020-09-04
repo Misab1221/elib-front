@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" >
+    <!-- my css-->
+    <link rel="stylesheet" type="text/css" href="css/mystyle.css">
+      <script src="lib/jquery-3.5.1.js"></script>
+      <script src="js/api.js"></script>
+    <title>e-Library</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">
+   <img src="images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+  
+  e-Library</a>
+ 
+</nav>
+
+<br>
+  <br>
+
+<div class="login-box polaroid">
+    <div class="alert alert-dismissible alert-danger fade show" style="display: none;font-size:13px;padding: 5px;margin: 0px; " id="alert">error</div>
+
+    <form method="GET" name="form" onsubmit="return validated()">
+   <h4>Login</h4>
+   <br>
+  <div >
+  <input type="text"class="marg" placeholder="User name" id="username" value="">
+  </div>
+  <div id="emailerror">Please Enter Your E-mail</div>
+  
+  <div >
+   <input type="password"class="marg" placeholder="Password" name="pwd" id="password" value="">
+   </div>
+   <div id="pwderror"> Enter the Password</div>
+      <button type="button" name="" value="Sign In" onclick="login()">Sign in<div id="loading" class="spinner-border" style="display: none"></div></button>
+<a href="#">Forgotten Password?</a>
+
+
+
+
+</form>
+</div>
+
+
+<script src="myjs.js"></script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js" ></script>
+    <script src="server.js"></script>
+    
+  </body>
+</html>

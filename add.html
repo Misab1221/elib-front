@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" >
+    <!-- my css-->
+    <link rel="stylesheet" type="text/css" href="css/mystyle.css">
+    <script src="lib/jquery-3.5.1.js"></script>
+    <script src="js/api.js"></script>
+    <title>e-Library</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">
+   <img src="images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+  
+  e-Library</a>
+  <ul class="navbar-nav ml-md-auto">
+  <li>
+	<a  href="#">Logout</a>
+	</div>
+	</li>
+</ul>
+</nav>
+
+ 
+  <div class="container">
+  <h3>Add Book</h3>
+  <hr>
+  <form method="post" name="form" onsubmit="return bookvali()">
+
+    <div class="row">
+      <div class="col-25">
+        <label for="book_title">Book Title</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="book_title" name="Book_Name" placeholder="Book Title">
+      </div>
+    </div>
+	<div class="row">
+      <div class="col-25">
+        <label for="author">Author</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="author" name="Author" placeholder="Author">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="publications">Publications</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="publications" name="Publications" placeholder="Publications">
+      </div>
+    </div>
+	<div class="row">
+      <div class="col-25">
+        <label for="edition">Edition</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="edition" name="Edition" placeholder="Edition">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="year">Published Year</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="year" name="Published_Year" placeholder="Published Year">
+      </div>
+    </div>
+	<div class="row">
+      <div class="col-25">
+        <label for="price">Price</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="price" name="Price" placeholder="Price">
+      </div>
+    </div>
+    <div class="alert alert-dismissible alert-danger fade show" style="display: none;font-size:13px;padding: 5px;margin: 0px; " id="alert">error</div>
+
+    <div class="row">
+	 
+	<button type="button" class="btncancel" onclick="myFunction()">Cancel </button>
+	<button type="reset" class="btnreset" >Reset </button>
+      <button type="button" value="Save" onclick="addBook()">Save <div id="loading" class="spinner-border" style="display: none"></div></button>
+	</form>
+	 </div>
+    
+  
+</div>
+
+
+<script>
+function myFunction() {
+  window.location.replace("home.html");
+  return false;
+}
+</script>
+
+<script src="myjs.js"></script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js" ></script>
+    <script src="server.js"></script>
+    
+  </body>
+</html>

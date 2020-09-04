@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" >
+    <!-- my css-->
+    <link rel="stylesheet" type="text/css" href="css/mystyle.css">  
+    <title>e-Library</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">
+   <img src="images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+  
+  e-Library</a>
+  <ul class="navbar-nav ml-md-auto">
+  <li>
+	<a  href="#">Logout</a>
+	</div>
+	</li>
+</ul>
+</nav>
+
+<div class="container">
+  <h2>Books</h2>   
+  <button onclick="myFunction()">Add New Book </button>
+<div class="table-responsive-xl">  
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Book Id</th>
+        <th>Book Name</th>
+        <th>Author</th>
+		<th></th>
+		<th></th>
+		<th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1036</td>
+        <td>Anci c</td>
+        <td>john</td>
+		<td><a href="view.html">View</a></td>
+		<td><a href="edit.html">Edit</a></td>
+        <td><a href="#">Delete</a></td>
+      </tr>
+	  <tr>
+        <td>1036</td>
+        <td>Anci c</td>
+        <td>john</td>
+		<td><a href="view.html">View</a></td>
+		<td><a href="edit.html">Edit</a></td>
+        <td><a href="#">Delete</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+ <ul class="pagination justify-content-end">
+    <li class="page-item"><a class="page-link" href="javascript:void(0);">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
+    <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+    <li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
+  </ul>
+  
+</div>
+<script>
+function myFunction() {
+  location.replace("add.html");
+}
+</script>
+<script src="myjs.js"></script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js" ></script>
+    <script src="server.js"></script>
+    
+  </body>
+</html>
