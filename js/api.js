@@ -27,7 +27,7 @@ function login() {
         else
         {
             document.cookie="token="+data.token;
-            alert(data.message);
+            alert(data.message+"ooo");
             window.location.href="dash.html";
         }
     });
