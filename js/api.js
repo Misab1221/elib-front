@@ -34,7 +34,7 @@ function login() {
         {
             document.cookie="token="+data.token;
             $("#success-alert").show();
-            window.location.href="dash.html";
+            window.location.href="home.html";
         }
     });
     //alert(username+password);
@@ -68,7 +68,7 @@ function addBook() {
         else
         {
             $("#success-alert").show();
-            window.location.href="dash.html";
+            window.location.href="home.html";
         }
     });
 
@@ -103,7 +103,7 @@ function editBook() {
         else
         {
             alert(data.message);
-            window.location.href="dash.html";
+            window.location.href="home.html";
         }
     });
 
@@ -182,7 +182,7 @@ function logout(){
     document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/e-lib;";
     alert("Logged out successfully");
-    window.location.href="home.html";
+    window.location.href="login.html";
 }
 window.page_no=1;
 function getBooks(page_no=1) {
@@ -297,7 +297,7 @@ function deleteBook(book_id) {
         else
         {
             $("#deleting").text("Deleted successfully. Reloading...");
-            window.location.href="dash.html";
+            window.location.href="home.html";
         }
     });
 
