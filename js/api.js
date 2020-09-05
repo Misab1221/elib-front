@@ -8,6 +8,7 @@ $.urlParam = function(name){
 }
 
 function login() {
+    $("#alert").hide();
     var username=$("#username").val();
     var password=$("#password").val();
     if(!username||!password)
@@ -32,7 +33,7 @@ function login() {
         else
         {
             document.cookie="token="+data.token;
-            alert(data.message);
+            $("#success-alert").show();
             window.location.href="dash.html";
         }
     });
@@ -66,7 +67,7 @@ function addBook() {
         }
         else
         {
-            alert(data.message);
+            $("#success-alert").show();
             window.location.href="dash.html";
         }
     });
@@ -207,6 +208,7 @@ function getBooks(page_no=1) {
         if(!data.status){
             window.location.href="login.html";
         }
+        var row_count=0;
         if(!data.books) {
             $("#alert").show();
             $("#alert").text(data.message);
@@ -216,14 +218,65 @@ function getBooks(page_no=1) {
         {
             $('#next').removeClass('disabled');
             console.log(data.books);
-            $("#dash-cont").show();
+            $("#dash-cont").show(300,"linear");
             $('#table').find('tbody').empty();
             for(i=0;i<data.books.length;i++)
             {
                 $("#alert").hide();
-                $('#table').append('<tr><td>'+data.books[i].book_id+'</td><td>'+data.books[i].book_title+'</td><td>'+data.books[i].author+'</td><td><a href="view.html?id='+data.books[i].book_id+'">View</a></td><td><a href="edit.html?id='+data.books[i].book_id+'">Edit</a></td><td><button onclick="deleteBook('+data.books[i].book_id+')" class="delete">Delete</button></td></tr>');
+                $('#table').append('<tr><td>'+data.books[i].book_id+'</td><td>'+data.books[i].book_title+'</td><td>'+data.books[i].author+'</td><td><a href="view.html?id='+data.books[i].book_id+'"><button class="delete">View</button></a></td><td><a href="edit.html?id='+data.books[i].book_id+'"><button class="delete btn-primary">Edit</button></a></td><td><button onclick="deleteBook('+data.books[i].book_id+')" class="delete btn-danger">Delete</button></td></tr>');
             }
+            console.log(i);
+            row_count=i;
         }
+
+        $("#row-count").text(row_count);
+    });
+
+}
+function searchBooks(page_no=1) {
+    if(page_no<1) {
+        page_no = 1;
+    }
+    if(page_no===1){
+        $('#pre').addClass('disabled');
+    }
+    else {
+        $('#pre').removeClass('disabled');
+    }
+    window.page_no=page_no;
+    var search=$("#search-key").val();
+    console.log(page_no);
+    $('#table').find('tbody').empty();
+    $("#fetching").show();
+    var token=getCookie("token");
+    $.ajaxSetup({crossDomain:true,xhrFields:{withCredentials:true}});
+    $.post(api_ip+"/admin/search-books",{"page_no":page_no,"token":token,"search":search},function (data,status) {
+        //alert(document.cookie);
+        $("#fetching").hide();
+        //$("#login-button").prop('disabled',false);
+        if(!data.status){
+            window.location.href="login.html";
+        }
+        var row_count=0;
+        if(!data.books) {
+            $("#alert").show();
+            $("#alert").text(data.message);
+            $('#next').addClass('disabled');
+        }
+        else
+        {
+            $('#next').removeClass('disabled');
+            console.log(data.books);
+            $("#dash-cont").show(300,"linear");
+            $('#table').find('tbody').empty();
+            for(i=0;i<data.books.length;i++)
+            {
+                $("#alert").hide();
+                $('#table').append('<tr><td>'+data.books[i].book_id+'</td><td>'+data.books[i].book_title+'</td><td>'+data.books[i].author+'</td><td><a href="view.html?id='+data.books[i].book_id+'"><button class="delete">View</button></a></td><td><a href="edit.html?id='+data.books[i].book_id+'"><button class="delete btn-primary">Edit</button></a></td><td><button onclick="deleteBook('+data.books[i].book_id+')" class="delete btn-danger">Delete</button></td></tr>');
+            }
+            row_count=i;
+        }
+        $("#row-count").text(row_count);
     });
 
 }
@@ -235,7 +288,7 @@ function deleteBook(book_id) {
     $.ajaxSetup({crossDomain:true,xhrFields:{withCredentials:true}});
     $.post(api_ip+"/admin/delete-book",{"book_id":book_id,"token":token},function (data,status) {
         //alert(document.cookie);
-        $("#deleting").hide();
+        //$("#deleting").hide();
         //$("#login-button").prop('disabled',false);
         if(!data.status) {
             $("#alert").show();
@@ -243,13 +296,12 @@ function deleteBook(book_id) {
         }
         else
         {
-            alert(data.message);
+            $("#deleting").text("Deleted successfully. Reloading...");
             window.location.href="dash.html";
         }
     });
 
 }
-
 function test() {
     alert('k');
 
