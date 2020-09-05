@@ -1,5 +1,5 @@
-var api_ip="https://m-01.herokuapp.com";
-var api_ip1="http://127.0.0.1:5000";
+var api_ip1="https://m-01.herokuapp.com";
+var api_ip="http://127.0.0.1:5000";
 $.urlParam = function(name){
     var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
     if(results==null)
@@ -28,7 +28,7 @@ function login() {
         {
             document.cookie="token="+data.token;
             alert(data.message);
-            window.location.href="index.php";
+            window.location.href="dash.html";
         }
     });
     //alert(username+password);
