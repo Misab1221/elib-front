@@ -141,6 +141,14 @@ body{
       border: 1px solid #EF9A9A;
       display: none;
   }
+#login-button {
+    width: 50%;
+    transition: width .5s;
+}
+
+#login-button:hover {
+    width: 100%;
+}
   .sidenav {
     height: 100%; /* Full-height: remove this if you want "auto" height */
     width: 160px; /* Set the width of the sidebar */
